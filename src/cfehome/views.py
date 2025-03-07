@@ -11,6 +11,7 @@ def home_page_view(request,*args,**kwargs):
   qs=PageVisit.objects.all()
   page_qs=qs.filter(path=request.path)
   my_title="My Page"
+  html_template="home.html"
   my_context={
     "page_title":my_title,
     "page_visit_count":qs.count(),
@@ -18,9 +19,7 @@ def home_page_view(request,*args,**kwargs):
     "total_visit_count":page_qs.count(),
     
     }
-  path=request.path
-  print("path",path)
-  html_template="home.html"
+  
   PageVisit.objects.create(path=request.path)
   return render(request,html_template,my_context) # string of HTML code
   
